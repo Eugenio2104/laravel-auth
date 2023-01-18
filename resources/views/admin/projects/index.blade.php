@@ -5,7 +5,7 @@
     <div class="my-container">
         <div class="p-3">
             <h1>dash</h1>
-            <a class="btn btn-success" href="">New Project</a>
+            <a class="btn btn-success" href="{{ route('admin.projects.create') }}">New Project</a>
         </div>
         <table class="table table-striped">
             <thead>
