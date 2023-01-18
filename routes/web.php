@@ -25,4 +25,5 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
     });
 
+
 require __DIR__ . '/auth.php';
