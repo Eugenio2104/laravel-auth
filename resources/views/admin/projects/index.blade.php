@@ -28,7 +28,8 @@
                         <td>{{ $project->summary }}</td>
                         <td>
                             <a class="btn btn-info" href=""><i class="fa-regular fa-eye"></i></a>
-                            <a class="btn btn-warning" href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project) }}"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
                             <form action="" method="post">
                                 @csrf
                                 @method('DELETE')

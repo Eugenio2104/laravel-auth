@@ -55,9 +55,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        return view('amdmin.projects.show', $project);
     }
 
     /**
@@ -66,9 +66,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -78,9 +78,19 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update(ProjectRequest $request, Project $project)
     {
-        //
+        $data = $request->all();
+
+        if ($data['name'] != $project->name) {
+            $data['slug'] = Project::generateSlug($data['name']);
+        } else {
+            $data['slug'] = $project->slug;
+        }
+        $project->update($data);
+
+        return redirect(route('admin.projects.show', $project));
     }
 
     /**
