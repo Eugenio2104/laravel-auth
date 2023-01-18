@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,17 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $new_item = new Project();
+        $data['slug'] = Project::generateSlug($data['name']);
+
+        $new_item->fill($data);
+        $new_item->save();
+
+        return redirect(route('admin.projects.index'));
     }
 
     /**
