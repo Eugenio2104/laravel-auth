@@ -95,6 +95,18 @@ class ProjectController extends Controller
         } else {
             $data['slug'] = $project->slug;
         }
+
+        if (array_key_exists('cover_image', $data)) {
+
+            // se invio una nuova immagine devo eliminare la vecchia dal filesystem
+            if ($project->image) {
+                Storage::disk('public')->delete($project->image);
+            }
+            $data['img_original'] = $request->file('cover_image')->getClientOriginalName();
+            $data['cover_image'] = Storage::put('uploads', $data['cover_image']);
+        }
+
+
         $project->update($data);
 
         return redirect(route('admin.projects.show', $project));

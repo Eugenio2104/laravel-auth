@@ -19,7 +19,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.projects.update', $project) }}" method="POST">
+        <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -43,9 +43,14 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="cover_image" class="form-label">price</label>
-                <input type="text" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image"
-                    name="cover_image" value="{{ old('cover_image', $project->price) }}" placeholder="cover_image">
+                <label for="cover_image" class="form-label">cover image</label>
+                <input type="file" onchange="showImage(event)"
+                    class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image"
+                    value="{{ old('cover_image', $project->price) }}" placeholder="cover_image">
+                <div class="image mt-2">
+                    <img width="75" id="output-image"
+                        src="{{ $project->cover_image ? asset('storage/' . $project->cover_image) : 'https://img.freepik.com/free-icon/user_318-790139.jpg?w=2000' }}">
+                </div>
                 @error('cover_image')
                     <div class="invalid-feedback">
                         <span>{{ $message }}</span>
@@ -64,4 +69,13 @@
             <button type="submit" class="btn btn-primary mb-5">Invia</button>
         </form>
     </div>
+
+    <script>
+        function showImage(event) {
+
+            const tagImage = document.getElementById('output-image');
+            tagImage.src = URL.createObjectURL(event.target.files[0]);
+            console.log(tagImage.src);
+        }
+    </script>
 @endsection

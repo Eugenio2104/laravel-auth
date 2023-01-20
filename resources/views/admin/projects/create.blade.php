@@ -51,7 +51,7 @@
                     class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image"
                     value="{{ old('cover_image') }}" placeholder="cover image">
                 <div class="image mt-2">
-                    <img width="75" id="output-image" src="">
+                    <img width="75" id="output-image">
                 </div>
                 @error('cover_image')
                     <div class="invalid-feedback">
