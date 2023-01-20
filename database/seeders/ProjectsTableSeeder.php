@@ -22,7 +22,6 @@ class ProjectsTableSeeder extends Seeder
             $new_item->slug = Project::generateSlug($new_item);
             $new_item->client_name = $faker->name();
             $new_item->summary = $faker->realText();
-            $new_item->cover_image = 'https://www.pngitem.com/pimgs/m/579-5798581_image-placeholder-circle-hd-png-download.png';
             $new_item->save();
         }
     }

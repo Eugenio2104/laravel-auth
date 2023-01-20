@@ -23,7 +23,7 @@
             <a class="btn btn-success" href="{{ route('admin.projects.index') }}">torna index</a>
         </div>
 
-        <form action="{{ route('admin.projects.store') }}" method="POST">
+        <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">name</label>
@@ -47,8 +47,12 @@
             </div>
             <div class="mb-3">
                 <label for="cover_image" class="form-label">cover image</label>
-                <input type="text" class="form-control @error('cover_image') is-invalid @enderror" id="cover_image"
-                    name="cover_image" value="{{ old('cover_image') }}" placeholder="cover image">
+                <input onchange="showImage(event)" type="file"
+                    class="form-control @error('cover_image') is-invalid @enderror" id="cover_image" name="cover_image"
+                    value="{{ old('cover_image') }}" placeholder="cover image">
+                <div class="image mt-2">
+                    <img width="75" id="output-image" src="">
+                </div>
                 @error('cover_image')
                     <div class="invalid-feedback">
                         <span>{{ $message }}</span>
@@ -68,4 +72,14 @@
             <button type="submit" class="btn btn-primary mb-5">Invia</button>
         </form>
     </div>
+
+
+    <script>
+        function showImage(event) {
+
+            const tagImage = document.getElementById('output-image');
+            tagImage.src = URL.createObjectURL(event.target.files[0]);
+            console.log(tagImage.src);
+        }
+    </script>
 @endsection

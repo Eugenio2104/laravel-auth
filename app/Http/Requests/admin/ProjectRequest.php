@@ -26,7 +26,7 @@ class ProjectRequest extends FormRequest
         return [
             'name' => 'Required |min:2|max:50',
             'client_name' => 'Required |min:2|max:75',
-            'cover_image' => 'Required',
+            'cover_image' => '|max:2048',
         ];
     }
 
@@ -39,7 +39,6 @@ class ProjectRequest extends FormRequest
             'client_name.required' => 'campo obbligatorio',
             'client_name.min' => 'caratterini minimi :min',
             'client_name.max' => 'caratterini massimi :max',
-            'cover_image.required' => 'campo obbligatorio',
         ];
     }
 }

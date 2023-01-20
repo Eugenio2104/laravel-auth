@@ -22,7 +22,9 @@
                 @foreach ($projects as $project)
                     <tr>
                         <th scope="row">{{ $project->id }}</th>
-                        <th><img class="thumb" src="{{ $project->cover_image }}" alt=""></th>
+                        <th><img class="thumb"
+                                src="{{ $project->cover_image ? asset('storage/' . $project->cover_image) : 'https://img.freepik.com/free-icon/user_318-790139.jpg?w=2000' }}"
+                                alt=""></th>
                         <td>{{ $project->name }}</td>
                         <td>{{ $project->client_name }}</td>
                         <td>{{ $project->summary }}</td>
@@ -42,5 +44,6 @@
                 @endforeach
             </tbody>
         </table>
+
     </div>
 @endsection
