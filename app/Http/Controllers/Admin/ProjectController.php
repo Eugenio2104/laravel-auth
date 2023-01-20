@@ -57,7 +57,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('amdmin.projects.show', $project);
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -99,8 +99,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('admin.projects.index')->with('deleted', "il progetto <strong> $project->name </strong> e stato eliminato correttamente");
     }
 }

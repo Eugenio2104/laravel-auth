@@ -27,10 +27,11 @@
                         <td>{{ $project->client_name }}</td>
                         <td>{{ $project->summary }}</td>
                         <td>
-                            <a class="btn btn-info" href=""><i class="fa-regular fa-eye"></i></a>
+                            <a class="btn btn-info" href="{{ route('admin.projects.show', $project) }}"><i
+                                    class="fa-regular fa-eye"></i></a>
                             <a class="btn btn-warning" href="{{ route('admin.projects.edit', $project) }}"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
-                            <form action="" method="post">
+                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="d-inline btn btn-danger" href=""><i
